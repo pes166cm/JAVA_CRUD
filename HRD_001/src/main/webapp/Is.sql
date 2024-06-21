@@ -66,12 +66,29 @@ decode(C_SCHOOL, '1', '고졸', '2', '학사', '3', '석사') C_SCHOOL,
 substr(C_JUMIN, 1, 6) || '-' || substr(C_JUMIN, 7, 7) C_JUMIN,
 C_CITY FROM T3_CANDIDATE;
 
-SELECT (P_TEL1 || '-' || P_TEL2 || '-' || P_TEL3) TEL FROM T3_PARTY;
+select A.c_no, A.c_name, B.p_name,
+decode(A.c_school, '1', '고졸', '2', '학사', '3', '석사', '4', '박사') c_school,
+substr(A.c_jumin, 1, 6) || '-' || substr(a.c_jumin, 7, 7) c_jumin,
+A.c_city, B.p_tel1 || '-' || B.p_tel2 || '-' || B.p_tel3 tel 
+from T3_CANDIDATE A, T3_PARTY B where A.p_code = B.p_code order by A.p_code;
+ 
 
+select v_name, '19' || substr(v_jumin,1,2)||'년'||substr(v_jumin,3,2)||'월'||substr(v_jumin,5,2)||'일' birth,
+'만'||(2024-(to_number('19'||substr(v_jumin,1,2))))||'세' age,
+decode(substr(v_jumin,7,1),'1', '남', '2', '여') gender,
+c_no, substr(v_time,1,2)||':'||substr(v_time,3,2) v_time,
+decode(v_confirm,'Y', '확인', 'N', '미확인') v_confirm
+from t3_vote;
 
-
-
-
+select A.c_no, 
+B.c_name, 
+C.p_name, 
+count(A.c_no) total,
+rank() over(order by count(A.c_no) desc) rank
+from t3_vote A, t3_candidate B, T3_PARTY C
+where A.c_no = B.c_no and B.p_code = C.p_code and A.v_confirm = 'Y'
+group by A.c_no, B.c_name, C.p_name
+order by rank;
 
 
 
