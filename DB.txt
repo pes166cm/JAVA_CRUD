@@ -38,7 +38,36 @@ insert into money_2024 values(100004, 20160008, 300, 1, 300, 'A005', '20160104')
 insert into money_2024 values(100004, 20160009, 600, 1, 600, 'A006', '20160104');
 insert into money_2024 values(100004, 20160010, 3000, 1, 3000, 'A007', '20160104');
 
+---------------------------------------------------------------------------------------------------------------------------------------------------
+create table t4_student(
+	s_no varchar2(5) not null primary key,
+	s_name varchar2(10),
+	s_phone varchar2(13),
+	s_gender char(1),
+	s_address varchar2(50)
+);
 
+insert into T4_STUDENT values('10101', '김행복', '010-1111-2222', 'M', '서울시 동대문구 휘경1동');
+insert into T4_STUDENT values('10102', '이축복', '010-1111-3333', 'F', '서울시 동대문구 휘경2동');
+insert into T4_STUDENT values('10103', '장믿음', '010-1111-4444', 'M', '경기도 안양시 안양1동');
+insert into T4_STUDENT values('10104', '최사랑', '010-1111-5555', 'F', '경기도 안양시 안양2동');
+insert into T4_STUDENT values('10105', '진평화', '010-1111-6666', 'M', '제주도 제주시 제주1동');
+insert into T4_STUDENT values('10106', '사공단', '010-1111-7777', 'M', '제주도 제주시 제주1동');
+
+select * from t4_student;
+
+create table T4_EXAM(
+	s_no varchar2(5) not null primary key,
+	e_kor number(4),
+	e_math number(4),
+	e_eng number(4),
+	e_hist number(4)
+);
+
+insert into T4_EXAM values('10101', 98.5, 91.3, 95.2, 90.6);
+insert into T4_EXAM values('10102', 87.4, 89.3, 92.8, 82.7);
+
+select * from T4_EXAM;
 
 
 
